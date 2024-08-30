@@ -9,7 +9,7 @@ import logging
 
 # Constants
 BASE_URL = "https://www.domain.com.au"
-N_PAGES = range(1, 5)  # Adjust as needed
+PAGE_NUMBER = 1  # Only scrape the first page
 
 # Initialize data structures
 url_links = []
@@ -19,27 +19,25 @@ property_metadata = defaultdict(dict)
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 logger = logging.getLogger()
 
-# Generate list of URLs to visit
-for page in N_PAGES:
-    url = f"{BASE_URL}/rent/melbourne-region-vic/?sort=price-desc&page={page}"
-    logger.info(f"Visiting {url}")
+# Generate the URL to visit
+url = f"{BASE_URL}/rent/melbourne-region-vic/?sort=price-desc&page={PAGE_NUMBER}"
+logger.info(f"Visiting {url}")
 
-    try:
-        response = urlopen(Request(url, headers={'User-Agent':"PostmanRuntime/7.6.0"}))
-        bs_object = BeautifulSoup(response, "lxml")
+try:
+    response = urlopen(Request(url, headers={'User-Agent':"PostmanRuntime/7.6.0"}))
+    bs_object = BeautifulSoup(response, "lxml")
 
-        # Attempt to find property links in a different way
-        property_cards = bs_object.findAll("li", {"data-testid": "result-card"})
-        for card in property_cards:
-            link_tag = card.find("a", href=True)
-            if link_tag:
-                full_url = BASE_URL + link_tag['href'] if not link_tag['href'].startswith(BASE_URL) else link_tag['href']
-                if full_url not in url_links:
-                    url_links.append(full_url)
+    # Find property links using the correct selector
+    property_cards = bs_object.findAll("li", {"data-testid": "listing-card"})
+    for card in property_cards:
+        link_tag = card.find("a", href=True)
+        if link_tag:
+            full_url = BASE_URL + link_tag['href'] if not link_tag['href'].startswith(BASE_URL) else link_tag['href']
+            if full_url not in url_links:
+                url_links.append(full_url)
 
-    except Exception as e:
-        logger.error(f"Error accessing {url}: {e}")
-        continue
+except Exception as e:
+    logger.error(f"Error accessing {url}: {e}")
 
 if not url_links:
     logger.warning("No property links found.")
@@ -80,7 +78,7 @@ for property_url in pbar:
             property_metadata[property_url]['parking'] = []
 
         # Extract description
-        desc_tag = bs_object.find("p")
+        desc_tag = bs_object.find("div", {"data-testid": "listing-details__description"})
         property_metadata[property_url]['desc'] = desc_tag.get_text(strip=True) if desc_tag else "N/A"
 
         success_count += 1
@@ -97,4 +95,3 @@ with open(output_file, 'w') as f:
     json.dump(property_metadata, f, indent=4)
 
 logger.info(f"Data saved to {output_file}")
-
