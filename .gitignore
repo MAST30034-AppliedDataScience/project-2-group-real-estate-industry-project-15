@@ -132,7 +132,7 @@ dmypy.json
 data/curated/
 data/raw/
 data/landing/
-A2_venv/
+.venv/
 
 # OSX .DS_Store file
 .DS_Store

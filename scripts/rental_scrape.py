@@ -93,6 +93,22 @@ for property_url in pbar:
 =======
 >>>>>>> 433ddf2 (updating the rental data scraping to extract the)
 
+        # Extract bond amount and availability from listing summary strip
+        summary_strip = bs_object.find("ul", {"data-testid": "listing-summary-strip"})
+        if summary_strip:
+            summary_items = summary_strip.findAll("li")
+            # Loop through summary items to find bond and availability details
+            for item in summary_items:
+                text = item.get_text(strip=True)
+                if "Bond" in text:
+                    property_metadata[property_url]['bond'] = text.replace('Bond', '').strip()
+                elif "Available" in text:
+                    property_metadata[property_url]['availability'] = text.replace('Date Available:', '').strip()
+
+        # Extract property type
+        property_type_element = bs_object.find("div", {"data-testid": "listing-summary-property-type"})
+        property_metadata[property_url]['property_type'] = property_type_element.text.strip() if property_type_element else 'Not available'
+
         success_count += 1
 
     except AttributeError:
