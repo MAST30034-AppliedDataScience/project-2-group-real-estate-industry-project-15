@@ -12,28 +12,42 @@ from urllib.request import urlopen, Request
 
 # constants
 BASE_URL = "https://www.domain.com.au"
-N_PAGES = range(52, 54) 
+#N_PAGES = range(51, 53) 
+Postcode = range(3000, 3001)
 
 # begin code
 url_links = []
 property_metadata = defaultdict(dict)
 
 # generate list of urls to visit
-for page in N_PAGES:
-    url = BASE_URL + f"/rent/?excludedeposittaken=1&state=vic&page={page}"
-    print(f"Visiting {url}")
-    bs_object = BeautifulSoup(urlopen(Request(url, headers={'User-Agent': "PostmanRuntime/7.6.0"})), "lxml")
+for postcode in Postcode:
+    page_number = 1
+    while True:
+        # Construct URL for each page of the postcode
+        url = BASE_URL + f"/rent/?postcode={postcode}&excludedeposittaken=1&sort=default-desc&page={page_number}"
+        print(f"Visiting {url}")
+        bs_object = BeautifulSoup(urlopen(Request(url, headers={'User-Agent': "PostmanRuntime/7.6.0"})), "lxml")
 
-    # find the unordered list (ul) elements which are the results, then
-    # find all href (a) tags that are from the base_url website.
-    index_links = bs_object \
-        .find("ul", {"data-testid": "results"}) \
-        .findAll("a", href=re.compile(f"{BASE_URL}/*"))  # the * denotes wildcard any
+        # Find property links on the page
+        try:
+            index_links = bs_object.find("ul", {"data-testid": "results"}).findAll("a", href=re.compile(f"{BASE_URL}/.*"))
+            found_links = False
+            for link in index_links:
+                # if its a property address, add it to the list
+                if 'address' in link.get('class', []):
+                    url_links.append(link['href'])
+                    found_links = True
 
-    for link in index_links:
-        # if it's a property address, add it to the list
-        if 'address' in link['class']:
-            url_links.append(link['href'])
+            # If no links were found, break out of the loop for this postcode
+            if not found_links:
+                break
+
+        except AttributeError:
+            # If the results list is not found, assume there are no more pages
+            break
+        
+        # Increment to check the next page
+        page_number += 1
 
 # for each url, scrape some basic metadata
 pbar = tqdm(url_links[1:])
@@ -98,6 +112,6 @@ for property_url in pbar:
 
     pbar.set_description(f"{(success_count / total_count * 100):.0f}% successful")
 
-# output to example json in data/raw/
-with open('../data/raw/scraped_properties.json', 'w') as f:
+# output scraped data into a file
+with open('../data/landing/scraped_properties.json', 'w') as f:
     dump(property_metadata, f)
