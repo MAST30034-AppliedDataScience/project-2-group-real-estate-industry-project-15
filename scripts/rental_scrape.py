@@ -4,27 +4,27 @@ from json import dump
 from tqdm import tqdm
 from collections import defaultdict
 import urllib.request
+from urllib.parse import urlparse, parse_qs
 
 # user packages
-from fake_useragent import UserAgent
 from bs4 import BeautifulSoup
 from urllib.request import urlopen, Request
 
 # constants
 BASE_URL = "https://www.domain.com.au"
 #N_PAGES = range(51, 53) 
-Postcode = range(3000, 3001)
+POSTCODES = range(3000, 3001)
 
 # begin code
 url_links = []
 property_metadata = defaultdict(dict)
 
 # generate list of urls to visit
-for postcode in Postcode:
+for code in POSTCODES:
     page_number = 1
     while True:
         # Construct URL for each page of the postcode
-        url = BASE_URL + f"/rent/?postcode={postcode}&excludedeposittaken=1&sort=default-desc&page={page_number}"
+        url = BASE_URL + f"/rent/?postcode={code}&excludedeposittaken=1&sort=default-desc&page={page_number}"
         print(f"Visiting {url}")
         bs_object = BeautifulSoup(urlopen(Request(url, headers={'User-Agent': "PostmanRuntime/7.6.0"})), "lxml")
 
@@ -104,6 +104,19 @@ for property_url in pbar:
         # Extract property type
         property_type_element = bs_object.find("div", {"data-testid": "listing-summary-property-type"})
         property_metadata[property_url]['property_type'] = property_type_element.text.strip() if property_type_element else 'Not available'
+
+        # Extract coordinates from Google Maps link
+        directions_link = bs_object.find("a", href=re.compile(r"https://www.google.com/maps/dir/"))
+        if directions_link and 'href' in directions_link.attrs:
+            href = directions_link['href']
+            parsed_url = urlparse(href)
+            query_params = parse_qs(parsed_url.query)
+            if 'destination' in query_params:
+                property_metadata[property_url]['coordinates'] = query_params['destination'][0]
+            else:
+                property_metadata[property_url]['coordinates'] = 'Not available'
+        else:
+            property_metadata[property_url]['coordinates'] = 'Not available'
 
         success_count += 1
 
