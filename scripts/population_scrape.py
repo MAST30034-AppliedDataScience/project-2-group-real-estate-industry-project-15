@@ -1,35 +1,13 @@
-# # Downloading the population extrernal dataset using API
-
-# from owslib.wfs import WebFeatureService
-# import pandas as pd 
-# import geopandas
-# import folium
-# import io
-# import os
-
-# script_dir = os.path.dirname(os.path.abspath(__file__))
-# os.chdir(script_dir)
-
-# WFS_USERNAME = 'kathleenfiona.wongso@student.unimelb.edu.au'
-# WFS_PASSWORD= 'eyJzdWIiOiI4NmVjZTlmNy0wZTI5LTQzNzMtYmM1Zi03ZmU3N2ZjMDNjOTAiLCJjaGsiOiI3ODM1NGE1MyIsImV4cCI6MTczMjc2NDk0Nn0.YIt2Sca5iJvVbANz7NHFqDiCAFLoazwyvyLHqnSGnss'
-# WFS_URL='https://adp.aurin.org.au/geoserver/wfs'
-
-# api_client = WebFeatureService(url=WFS_URL,username=WFS_USERNAME, password=WFS_PASSWORD, version='1.1.0')
-
-# response = api_client.getfeature(typename='datasource-AU_Govt_ABS-UoM_AURIN_DB_3:abs_regional_population_sa2_2001_2021', outputFormat='csv')
-
-# out = open('../data/landing/population.csv', 'wb')
-# out.write(response.read())
-# out.close()
-
-########################## UPDATED CODE ########################## 
-# Import the Libraries 
-import requests
-import pandas as pd
+# Import libraries
 import os
 import io
+import requests
+import pandas as pd
 
-# URL to the excel file contianing population data 
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
+
+# URL to the excel file containing population data 
 url = "https://www.abs.gov.au/statistics/people/population/regional-population/2022-23/32180DS0001_2022-23.xlsx"
 response = requests.get(url)
 
@@ -48,9 +26,6 @@ column_headers = [
 ]
 
 df.columns = column_headers
-
-# Create the directory if it does not already exist
-os.makedirs("../data/landing/", exist_ok=True)
 
 # Save the data into a CSV file in the specified directory
 df.to_csv("../data/landing/population.csv", index=False)
