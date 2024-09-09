@@ -133,6 +133,7 @@ data/curated/
 data/raw/
 data/landing/
 .venv/
+playground.ipynb
 
 # OSX .DS_Store file
 .DS_Store
