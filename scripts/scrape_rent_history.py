@@ -1,4 +1,8 @@
 import pandas as pd
+import os
+
+script_dir = os.path.dirname(os.path.abspath(__file__))
+os.chdir(script_dir)
 
 # Retrieve the data from the excel file (for all sheets)
 rent_history_excel = "https://www.dffh.vic.gov.au/moving-annual-rent-suburb-march-quarter-2024-excel"
