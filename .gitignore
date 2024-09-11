@@ -135,6 +135,7 @@ data/landing/
 data/map/
 .venv/
 notebooks/playground.ipynb
+scripts/scrape_urban_landmarks.py
 
 # OSX .DS_Store file
 .DS_Store
