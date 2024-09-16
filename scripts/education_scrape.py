@@ -235,7 +235,7 @@ print(f"File downloaded and saved to {file_path}")
 
 ############################################ University Locations Download #########################################
 # download from this link and manually move into ../data/landing folder using link below
-# https://drive.google.com/file/d/1D432NwL6SSUs5zG_ZMDjG4CYq2JT4MNO/view?usp=sharing
+# https://drive.google.com/file/d/1QjjAcr1DCn_mv6fpZXqFwNWGziAoHHYT/view?usp=sharing
 ####################################################################################################################
 
 ############################################ 2024 Government Primary Secondary School Zones Download ###############
