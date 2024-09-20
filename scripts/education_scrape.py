@@ -1,126 +1,47 @@
 import requests
+import pandas as pd
 from bs4 import BeautifulSoup
+from io import BytesIO
 import csv
 import os
 
-############################################ Highschool Rankings Script ###########################################
-# setting the URL
-url = "https://schoolsfinders.com/victoria-high-school-ranking/"
+############################################ Highschool School achievements Script #################################
+# URL of the file to download
+download_link = 'https://www.vcaa.vic.edu.au/Documents/statistics/2023/2023SeniorSecondaryCompletionAndAchievementInformation.xlsx'
 
-# setting headers to mimic a browser
-headers = {
-    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
-}
+# Directory where the CSV file should be saved
+save_directory = '../project-2-group-real-estate-industry-project-15/data/landing'
+# Ensure the save directory exists
+if not os.path.exists(save_directory):
+    os.makedirs(save_directory)
 
-# sending request to website
-response = requests.get(url, headers=headers)
+# Define the CSV file name for saving
+csv_file_name = '2023SeniorSecondaryCompletionAndAchievementInformation.csv'
 
-# setting the directory path to where the data is saved
-directory = "../project-2-group-real-estate-industry-project-15/data/landing"
+# Full file path for the CSV file
+csv_file_path = os.path.join(save_directory, csv_file_name)
 
-# making sure directory exists
-if not os.path.exists(directory):
-    os.makedirs(directory)
+# Download the Excel file in memory (no need to save it)
+response = requests.get(download_link)
 
-# path for the CSV file
-csv_file_path = os.path.join(directory, 'VIC_high_school_rankings.csv')
-
-# checking if the request was successful
+# Check if the download was successful
 if response.status_code == 200:
-    # parse the HTML content
-    soup = BeautifulSoup(response.content, 'html.parser')
+    # Load the Excel file content into a BytesIO object
+    # Skip the first 9 rows (meta data) and set the 10th row (index 9) as headers
+    excel_data = pd.read_excel(BytesIO(response.content), skiprows=9)
 
-    # finding the table
-    heading_div = soup.find('div', class_='elementor-widget-heading')
+    # Set the second row (after skip) as the header manually
+    excel_data.columns = excel_data.iloc[0]  # Use the first row of the dataframe as the header
+    excel_data = excel_data[1:]  # Remove the row that we used as header
 
-    if heading_div:
-        table = heading_div.find_next('table')
+    # Convert the cleaned dataframe to CSV and save it
+    excel_data.to_csv(csv_file_path, index=False)
 
-        # making sure the table is found
-        if table:
-            # extract headers 
-            headers = [header.text.strip() for header in table.find_all('th')]
-
-            # extract table rows
-            rows = []
-            for row in table.find_all('tr')[1:]:
-                columns = [col.text.strip() for col in row.find_all('td')]
-                rows.append(columns)
-
-            # save data as CSV file 
-            with open(csv_file_path, 'w', newline='', encoding='utf-8') as file:
-                writer = csv.writer(file)
-                writer.writerow(headers)
-                writer.writerows(rows)
-
-            print(f"Data has been saved to {csv_file_path}")
-        else:
-            print("Table not found in the page content.")
-    else:
-        print("The heading division before the table was not found.")
+    print(f'Excel file has been converted to CSV (with the correct headers) and saved as {csv_file_path}')
 else:
-    print(f"Failed to retrieve the page. Status code: {response.status_code}")
+    print(f'Failed to download the file. Status code: {response.status_code}')
+
 ####################################################################################################################
-
-
-
-############################################ Primary School Rankings Script ########################################
-# setting the URL
-url = "https://bettereducation.com.au/school/Primary/vic/vic_top_primary_schools.aspx"
-
-# set headers to mimic a browser
-headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
-}
-
-response = requests.get(url, headers=headers)
-
-# setting the directory path to where the data is saved
-directory = "../project-2-group-real-estate-industry-project-15/data/landing"
-
-# making sure directory exists
-if not os.path.exists(directory):
-    os.makedirs(directory)
-
-# csv file path
-csv_file_path = os.path.join(directory, 'VIC_primary_school_rankings.csv')
-
-# check if the request was successful
-if response.status_code == 200:
-    # validate content type
-    if 'text/html' in response.headers['Content-Type']:
-        # parse the HTML content 
-        soup = BeautifulSoup(response.content, 'html.parser')
-
-        # find table containing the school data
-        table = soup.find('table', {'class': 'table table-striped table-bordered table-hover'})
-
-        # ensure the table is found
-        if table:
-            # extract table headers
-            headers = [header.text.strip() for header in table.find_all('th')]
-
-            # extract table rows
-            rows = []
-            for row in table.find_all('tr')[1:]:  # Skipping the header row
-                columns = [col.text.strip() for col in row.find_all('td')]
-                rows.append(columns)
-
-            # save the data into a CSV 
-            with open(csv_file_path, 'w', newline='', encoding='utf-8') as file:
-                writer = csv.writer(file)
-                writer.writerow(headers)
-                writer.writerows(rows)
-
-            print(f"Data has been saved to {csv_file_path}")
-        else:
-            print("Table not found in the page content.")
-    else:
-        print("Unexpected content type:", response.headers['Content-Type'])
-else:
-    print(f"Failed to retrieve the page. Status code: {response.status_code}")
-###################################################################################################################
-
 
 
 ############################################ TAFE Locations Script ################################################
@@ -236,9 +157,4 @@ print(f"File downloaded and saved to {file_path}")
 ############################################ University Locations Download #########################################
 # download from this link and manually move into ../data/landing folder using link below
 # https://drive.google.com/file/d/1QjjAcr1DCn_mv6fpZXqFwNWGziAoHHYT/view?usp=sharing
-####################################################################################################################
-
-############################################ 2024 Government Primary Secondary School Zones Download ###############
-# download from this link and manually move into ../data/landing folder using link below
-# https://drive.google.com/drive/folders/1nyHvBrIJ2sAxyDtPM2Ia1YLR-qAV-WX_?usp=sharing
 ####################################################################################################################
