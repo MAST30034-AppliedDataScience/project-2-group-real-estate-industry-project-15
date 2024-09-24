@@ -158,3 +158,31 @@ print(f"File downloaded and saved to {file_path}")
 # download from this link and manually move into ../data/landing folder using link below
 # https://drive.google.com/file/d/1QjjAcr1DCn_mv6fpZXqFwNWGziAoHHYT/view?usp=sharing
 ####################################################################################################################
+
+
+############################################# Sedondary School Enrollments Download ################################
+# Step 1: Set the URL for the data
+url = "https://www.education.vic.gov.au/Documents/about/research/datavic/dv355-VIC%20All%20Schools%20Enrolments%202023.csv"
+
+# Step 2: Set the file directory
+directory = "../project-2-group-real-estate-industry-project-15/data/landing"  # Adjust the path according to your project structure
+
+# Step 3: Ensure the directory exists, if not, create it
+if not os.path.exists(directory):
+    os.makedirs(directory)
+
+# Step 4: Define the file path where the data will be saved
+file_path = os.path.join(directory, "All_schools_enrollments.csv")
+
+# Step 5: Download the data
+response = requests.get(url)
+
+# Step 6: Check if the download was successful (status code 200)
+if response.status_code == 200:
+    # Step 7: Save the contents to a file
+    with open(file_path, 'wb') as file:
+        file.write(response.content)
+    print(f"File downloaded and saved to {file_path}")
+else:
+    print(f"Failed to download the file. Status code: {response.status_code}")
+####################################################################################################################
