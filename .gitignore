@@ -137,6 +137,7 @@ data/map/
 notebooks/playground.ipynb
 scripts/scrape_urban_landmarks.py
 scripts/scrape.py
+notebooks/analysis_crime.ipynb
 
 # OSX .DS_Store file
 .DS_Store
