@@ -143,5 +143,6 @@ notebooks/analysis_crime_test.ipynb
 .DS_Store
 
 
-#plots
+#notebooks
+notebooks/analyses/analysis_crime_prediction.ipynb
 
