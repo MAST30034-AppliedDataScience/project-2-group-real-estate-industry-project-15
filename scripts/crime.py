@@ -26,7 +26,7 @@ print(f"Downloaded {filename} to {output_path}")
 #only save the relevent tab into a parquet
 df_fifth_sheet = pd.read_excel(output_path, sheet_name="Table 03", header=0)
 
-# Save the DataFrame to a Parquet file
+# Save the DataFrame to a Parquet file, this might take a minute
 output_parquet_path = os.path.join(crime_output_dir, "crime.parquet")
 df_fifth_sheet.to_parquet(output_parquet_path)
 
