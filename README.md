@@ -3,7 +3,7 @@
 ### Welcome to the Group 15 Industry Project Repository!
 
 ### **Project Aim** 
-Forecast the median rental prices in Victoria for the next three years (2025-2027) using a range of engineered features identified as relevant predictors. Additionally, we aim to identify the most important internal and external ffeatures influencing rental prices and highlight the top 10 growth suburbs.
+Forecast the median rental prices in Victoria for the next three years (2025-2027) using a range of engineered features identified as relevant predictors. Additionally, we aim to identify the most important internal and external features influencing rental prices and highlight the top 10 growth suburbs.
 
 <br>
 
