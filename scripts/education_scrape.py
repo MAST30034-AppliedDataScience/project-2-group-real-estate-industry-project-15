@@ -155,12 +155,12 @@ print(f"File downloaded and saved to {file_path}")
 ####################################################################################################################
 
 ############################################ University Locations Download #########################################
-# download from this link and manually move into ../data/landing folder using link below
-# https://drive.google.com/file/d/1QjjAcr1DCn_mv6fpZXqFwNWGziAoHHYT/view?usp=sharing
+# please download from this link and manually move into ../data/landing folder using link below
+# https://drive.google.com/file/d/1JeagnK1mksrDNj3ZoB-oANyZi-Cakx3f/view?usp=share_link
 ####################################################################################################################
 
 
-############################################# Sedondary School Enrollments Download ################################
+############################################# All School Enrollments Download ################################
 # Step 1: Set the URL for the data
 url = "https://www.education.vic.gov.au/Documents/about/research/datavic/dv355-VIC%20All%20Schools%20Enrolments%202023.csv"
 
