@@ -7,6 +7,8 @@ Please find below links to all the datasets we utilised along with instructions 
 - [2000 - 2024 Median Rental History by Quarters](https://data.aurin.org.au/dataset/au-govt-abs-sa2-2016-aust-na)
   - Please run the `rental_history_scrape.py` script to download all the relevant data for each property type into the `\data\landing` directory. 
 
+<br>
+
 ## Income
 These are the links and instructions for the datasets we used in our income analysis. 
 - [2016 SA2 Codes and Names](https://data.aurin.org.au/dataset/au-govt-abs-sa2-2016-aust-na)
