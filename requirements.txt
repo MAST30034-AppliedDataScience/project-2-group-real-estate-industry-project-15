@@ -82,6 +82,7 @@ numpy==2.1.1
 oauthlib==3.2.0
 openpy==0.0.2
 openpyxl==3.1.5
+openrouteservice==2.3.3
 orca==1.8
 outcome==1.3.0.post0
 overrides==7.7.0
@@ -108,6 +109,7 @@ Pygments==2.18.0
 pyogrio==0.9.0
 pyparsing==3.1.4
 pyproj==3.6.1
+python-dotenv==0.21.0
 python-dateutil==2.9.0.post0
 python-json-logger==2.0.7
 pytz==2024.1
@@ -116,6 +118,7 @@ pyzmq==26.2.0
 qtconsole==5.5.2
 QtPy==2.4.1
 referencing==0.35.1
+regex==2023.10.3
 requests==2.32.3
 rfc3339-validator==0.1.4
 rfc3986-validator==0.1.1
