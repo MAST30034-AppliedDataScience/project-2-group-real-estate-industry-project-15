@@ -3,6 +3,13 @@ Please provide a high level `README.md` for your chosen datasets
 
 Please find below links to all the datasets we utilised along with instructions on how to retrieve them to run our notebooks and models. 
 
+## Rental Properties
+- [Domain Rental Properties](https://domain.com.au)
+  - Run the `domain_rental_scrape.py` script to web scrape all current properties up for rent in Victoria. This will be downloaded in the `\data\landing` directory.
+  - **NOTE:** It will probably take around 3-4 hours to run this full script.
+
+<br> 
+
 ## Rental History
 - [2000 - 2024 Median Rental History by Quarters](https://data.aurin.org.au/dataset/au-govt-abs-sa2-2016-aust-na)
   - Please run the `rental_history_scrape.py` script to download all the relevant data for each property type into the `\data\landing` directory. 
@@ -32,6 +39,7 @@ These are the links and instructions for the datasets we used in our income anal
 - [OpenStreetMap (OSM) Data for Australia Sub Region](https://download.geofabrik.de/australia-oceania.html)
   - On the webpage, under the `Sub Regions` heading, we downloaded the `.shp.zip` file from the Australia sub region.
   - For ease of access we have provided the relevant shape files in our Google drive under the folder named `OSM Data Files`. Please download this folder (as a whole) into the `\data\map` directory. 
+  - The files on public transport were copied to a new folder called `Public Transport Victoria` for ease of use and that folder was then moved to the `\data\map\` directory. 
   
 <br>
 
