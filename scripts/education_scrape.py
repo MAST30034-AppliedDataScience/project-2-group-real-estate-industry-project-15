@@ -6,35 +6,34 @@ import csv
 import os
 
 ############################################ Highschool School achievements Script #################################
-# URL of the file to download
+# uRL of the file to download
 download_link = 'https://www.vcaa.vic.edu.au/Documents/statistics/2023/2023SeniorSecondaryCompletionAndAchievementInformation.xlsx'
 
-# Directory where the CSV file should be saved
+# set directory
 save_directory = '../project-2-group-real-estate-industry-project-15/data/landing'
-# Ensure the save directory exists
+# ensure save directory exists
 if not os.path.exists(save_directory):
     os.makedirs(save_directory)
 
-# Define the CSV file name for saving
+# define CSV file name for saving
 csv_file_name = '2023SeniorSecondaryCompletionAndAchievementInformation.csv'
 
-# Full file path for the CSV file
+# file path for the CSV file
 csv_file_path = os.path.join(save_directory, csv_file_name)
 
-# Download the Excel file in memory (no need to save it)
+# download the Excel file in memory
 response = requests.get(download_link)
 
-# Check if the download was successful
+# check if the download was successful
 if response.status_code == 200:
-    # Load the Excel file content into a BytesIO object
-    # Skip the first 9 rows (meta data) and set the 10th row (index 9) as headers
+    # skip the first 9 rows (meta data) and set the 10th row (index 9) as headers
     excel_data = pd.read_excel(BytesIO(response.content), skiprows=9)
 
-    # Set the second row (after skip) as the header manually
-    excel_data.columns = excel_data.iloc[0]  # Use the first row of the dataframe as the header
-    excel_data = excel_data[1:]  # Remove the row that we used as header
+    # set the second row (after skip) as the header manually
+    excel_data.columns = excel_data.iloc[0]  # sse the first row of the dataframe as the header
+    excel_data = excel_data[1:]
 
-    # Convert the cleaned dataframe to CSV and save it
+    # convert the cleaned dataframe to CSV and save
     excel_data.to_csv(csv_file_path, index=False)
 
     print(f'Excel file has been converted to CSV (with the correct headers) and saved as {csv_file_path}')
@@ -135,7 +134,7 @@ else:
 url = "https://www.education.vic.gov.au/Documents/about/research/datavic/dv346-schoollocations2023.csv"
 
 # setting file directory
-directory = "../project-2-group-real-estate-industry-project-15/data/landing"  # Adjust the path to be in the same hierarchy as the scripts folder
+directory = "../project-2-group-real-estate-industry-project-15/data/landing"  # adjust the path to be in the same hierarchy as the scripts folder
 
 # making sure directory exists
 if not os.path.exists(directory):
@@ -161,25 +160,25 @@ print(f"File downloaded and saved to {file_path}")
 
 
 ############################################# All School Enrollments Download ################################
-# Step 1: Set the URL for the data
+# set the URL for the data
 url = "https://www.education.vic.gov.au/Documents/about/research/datavic/dv355-VIC%20All%20Schools%20Enrolments%202023.csv"
 
-# Step 2: Set the file directory
+# set the file directory
 directory = "../project-2-group-real-estate-industry-project-15/data/landing"  # Adjust the path according to your project structure
 
-# Step 3: Ensure the directory exists, if not, create it
+# ensure the directory exists
 if not os.path.exists(directory):
     os.makedirs(directory)
 
-# Step 4: Define the file path where the data will be saved
+# define the file path where the data will be saved
 file_path = os.path.join(directory, "All_schools_enrollments.csv")
 
-# Step 5: Download the data
+# download data
 response = requests.get(url)
 
-# Step 6: Check if the download was successful (status code 200)
+# check if the download was successful
 if response.status_code == 200:
-    # Step 7: Save the contents to a file
+    # save the contents to a file
     with open(file_path, 'wb') as file:
         file.write(response.content)
     print(f"File downloaded and saved to {file_path}")
