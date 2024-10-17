@@ -17,9 +17,11 @@ Before running our code, please ensure you’ve read our requirements.txt file a
 #### *Run All Notebooks in the Repository:*
 1. Run all the files under the scripts directory in order to obtain the necessary datasets.
 2. Access each notebook in the preprocessing folder, follow the specific instructions as outlined at the top of the notebook in the PLEASE READ: DATA DOWNLOAD section to download the required datasets from our [Google Drive](https://drive.google.com/drive/folders/1JzqWIVPAHOvMeD0X1u3RefYBSj1PehZ0?usp=sharing).
+    - Note that only UniMelb accounts are able to access the Google Drive.
 3. Run all the notebooks in the preprocessing folder, located in the notebooks directory.
 4. Access the modelling.ipynb notebook located in the models folder. 
     - Follow the data download instructions outlined in the PLEASE READ: DATA DOWNLOAD section of that notebook. 
+    - **MUST** download the feature sets from the [Google Drive](https://drive.google.com/drive/folders/1JzqWIVPAHOvMeD0X1u3RefYBSj1PehZ0?usp=sharing).
 5. Run the the modelling.ipynb notebook.
     - Please note this notebook takes around 30 minutes to run. 
 5. Run all the notebooks in the anlayses folder, in the notebooks directory.
