@@ -26,3 +26,10 @@ These are the links and instructions for the datasets we used in our income anal
 - [OpenStreetMap (OSM) Data for Australia Sub Region](https://download.geofabrik.de/australia-oceania.html)
   - On the webpage, under the `Sub Regions` heading, we downloaded the `.shp.zip` file from the Australia sub region.
   - For ease of access we have provided the relevant shape files in our Google drive under the folder named `OSM Data Files`. Please download this folder (as a whole) into the `\data\map` directory. 
+
+  <br>
+
+  ## Crime
+  Crime severity and crime rates were factored in, as safety is a critical concern for both renters and property managers alike. This data was obtained from the [Crime Statistics Agency](https://www.crimestatistics.vic.gov.au/).
+
+  Download of relevent data can be done through crime_scrape.py
