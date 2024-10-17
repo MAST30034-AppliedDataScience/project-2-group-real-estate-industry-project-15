@@ -22,7 +22,13 @@ These are the links and instructions for the datasets we used in our income anal
 
 <br>
 
-## Urban Landmarks 
+## Population
+- [Population estimates by SA2 and above, 2001 to 2023](https://www.abs.gov.au/statistics/people/population/regional-population/2022-23/32180DS0003_2001-23.xlsx)
+  - Please run `population_scrape.py` script to download this data into the `\data\landing\` directory.
+
+<br>
+
+## Urban Landmarks & Public Transport
 - [OpenStreetMap (OSM) Data for Australia Sub Region](https://download.geofabrik.de/australia-oceania.html)
   - On the webpage, under the `Sub Regions` heading, we downloaded the `.shp.zip` file from the Australia sub region.
   - For ease of access we have provided the relevant shape files in our Google drive under the folder named `OSM Data Files`. Please download this folder (as a whole) into the `\data\map` directory. 
