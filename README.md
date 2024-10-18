@@ -34,7 +34,7 @@ For the [OpenRouteService](https://openrouteservice.org/) API, register for an a
 5. Run the the `modelling.ipynb` notebook.
     - Please note this notebook takes around 30 minutes to run. 
 5. Run all the notebooks in the `notebooks/analyses/` directory.
-6. Run all the notebooks in the `notebooks/feature_eng` directory.
+6. Run all the notebooks in the `notebooks/feature_eng/` directory.
 7. Finally, run the `analysis_rental_predictions.ipynb` notebook located in the `models` directory.
     - Follow the instructions in the RENT VISION PRO USAGE section to modify the specific suburb and property type examined in the Rent Vision Pro Tool. 
 
