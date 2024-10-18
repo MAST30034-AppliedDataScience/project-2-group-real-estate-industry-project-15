@@ -1,18 +1,16 @@
 # Datasets
-Please provide a high level `README.md` for your chosen datasets
-
 Please find below links to all the datasets we utilised along with instructions on how to retrieve them to run our notebooks and models. 
 
 ## Rental Properties
 - [Domain Rental Properties](https://domain.com.au)
-  - Run the `domain_rental_scrape.py` script to web scrape all current properties up for rent in Victoria. This will be downloaded in the `\data\landing` directory.
+  - Run the `domain_rental_scrape.py` script to web scrape all current properties up for rent in Victoria. This will be downloaded in the `data/landing/` directory.
   - **NOTE:** It will probably take around 3-4 hours to run this full script.
 
 <br> 
 
 ## Rental History
 - [2000 - 2024 Median Rental History by Quarters](https://data.aurin.org.au/dataset/au-govt-abs-sa2-2016-aust-na)
-  - Please run the `rental_history_scrape.py` script to download all the relevant data for each property type into the `\data\landing` directory. 
+  - Please run the `rental_history_scrape.py` script to download all the relevant data for each property type into the `data/landing/` directory. 
 
 <br>
 
@@ -31,15 +29,15 @@ These are the links and instructions for the datasets we used in our income anal
 
 ## Population
 - [Population estimates by SA2 and above, 2001 to 2023](https://www.abs.gov.au/statistics/people/population/regional-population/2022-23/32180DS0003_2001-23.xlsx)
-  - Please run `population_scrape.py` script to download this data into the `\data\landing\` directory.
+  - Please run `population_scrape.py` script to download this data into the `data/landing/` directory.
 
 <br>
 
 ## Urban Landmarks & Public Transport
 - [OpenStreetMap (OSM) Data for Australia Sub Region](https://download.geofabrik.de/australia-oceania.html)
   - On the webpage, under the `Sub Regions` heading, we downloaded the `.shp.zip` file from the Australia sub region.
-  - For ease of access we have provided the relevant shape files in our Google drive under the folder named `OSM Data Files`. Please download this folder (as a whole) into the `\data\map` directory. 
-  - The files on public transport were copied to a new folder called `Public Transport Victoria` for ease of use and that folder was then moved to the `\data\map\` directory. 
+  - For ease of access we have provided the relevant shape files in our Google drive under the folder named `OSM Data Files`. Please download this folder (as a whole) into the `data/map/` directory. 
+  - The files on public transport were copied to a new folder called `Public Transport Victoria` for ease of use and that folder was then moved to the `data/map/` directory. 
   
 <br>
 
@@ -61,4 +59,4 @@ For University data, the website did not allow scraping but authorised individua
   ## Crime
   Crime severity and crime rates were factored in, as safety is a critical concern for both renters and property managers alike. This data was obtained from the [Crime Statistics Agency](https://www.crimestatistics.vic.gov.au/).
 
-  Download of relevent data can be done through crime_scrape.py
+  Download of relevent data can be done through `crime_scrape.py`
