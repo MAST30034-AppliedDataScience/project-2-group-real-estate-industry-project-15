@@ -23,19 +23,16 @@ For the [OpenRouteService](https://openrouteservice.org/) API, register for an a
 
 
 #### 3. *Run All Notebooks in the Repository:*
-1. Run all the files under the scripts directory in order to obtain the necessary datasets.
+1. Run all the files under the `scripts` directory in order to obtain the necessary datasets.
 2. Access each notebook in the `preprocessing` folder, follow the specific instructions as outlined at the top of the notebook in the **PLEASE READ: DATA DOWNLOAD** section to download the required datasets from our [Google Drive](https://drive.google.com/drive/folders/1JzqWIVPAHOvMeD0X1u3RefYBSj1PehZ0?usp=sharing).
     - Note that only UniMelb accounts are able to access the Google Drive.
 3. Run all the notebooks in the `preprocessing` folder, located in the `notebooks` directory.
-4. Access the `modelling.ipynb` notebook located in the `models` folder. 
-    - Follow the data download instructions outlined in the **PLEASE READ: DATA DOWNLOAD** section of that notebook. 
-    - **MUST** download the feature sets from the [Google Drive](https://drive.google.com/drive/folders/1JzqWIVPAHOvMeD0X1u3RefYBSj1PehZ0?usp=sharing).
-    - To obtain the same results as we did for the modelling, it would be best to use the same data from our Google Drive, specifically for the scraped Domain data.
-5. Run the the `modelling.ipynb` notebook.
+4. Run the `merged_feature_sets.ipynb` notebook in the `models` directory.
+5. Run all the notebooks in the `notebooks/feature_eng/` directory.
+6. Run the the `modelling.ipynb` notebook.
     - Please note this notebook takes around 30 minutes to run. 
-5. Run all the notebooks in the `notebooks/analyses/` directory.
-6. Run all the notebooks in the `notebooks/feature_eng/` directory.
-7. Finally, run the `analysis_rental_predictions.ipynb` notebook located in the `models` directory.
+7. Run all the notebooks in the `notebooks/analyses/` directory.
+8. Finally, run the `analysis_rental_predictions.ipynb` notebook located in the `models` directory.
     - Follow the instructions in the RENT VISION PRO USAGE section to modify the specific suburb and property type examined in the Rent Vision Pro Tool. 
 
 <br>
